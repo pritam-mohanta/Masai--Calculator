@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Masai Calculator</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: gray;
+      }
+
+      .calculator {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 300px;
+        background-color: white;
+        padding: 10px;
+        border-radius: 20px;
+      }
+
+      #display {
+        width: 80%;
+        height: 40px;
+        font-size: 20px;
+        text-align: right;
+        margin-bottom: 10px;
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+
+      .button {
+        height: 40px;
+        width: 50px;
+        font-size: 18px;
+        text-align: center;
+        line-height: 40px;
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .button:hover {
+        background-color: aqua;
+      }
+
+      .clear {
+        background-color: red;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="calculator">
+      <input type="text" id="display" disabled>
+
+      <div class="button-container">
+        <button class="button" onclick="appendToDisplay('7')">7</button>
+        <button class="button" onclick="appendToDisplay('8')">8</button>
+        <button class="button" onclick="appendToDisplay('9')">9</button>
+        <button class="button" onclick="appendToDisplay('/')">/</button>
+      </div>
+      <div class="button-container">
+        <button class="button" onclick="appendToDisplay('4')">4</button>
+        <button class="button" onclick="appendToDisplay('5')">5</button>
+        <button class="button" onclick="appendToDisplay('6')">6</button>
+        <button class="button" onclick="appendToDisplay('*')">*</button>
+      </div>
+
+      <div class="button-container">
+        <button class="button" onclick="appendToDisplay('1')">1</button>
+        <button class="button" onclick="appendToDisplay('2')">2</button>
+        <button class="button" onclick="appendToDisplay('3')">3</button>
+        <button class="button" onclick="appendToDisplay('-')">-</button>
+      </div>
+
+      <div class="button-container">
+        <button class="button" onclick="appendToDisplay('0')">0</button>
+        <button class="button" onclick="appendToDisplay('.')">.</button>
+        <button class="button" onclick="calculateResult()">=</button>
+        <button class="button" onclick="appendToDisplay('+')">+</button>
+      </div>
+
+      <div class="button-container">
+        <button class="button clear" onclick="clearDisplay()">C</button>
+      </div>
+    </div>
+
+    <script>
+      // Initialize the current input
+      let currinp = '';
+
+      // Function to append the value to the display
+      function appendToDisplay(value) {
+        currinp += value;
+        document.getElementById('display').value = currinp;
+      }
+
+      // Function to clear the display
+      function clearDisplay() {
+        currinp = '';
+        document.getElementById('display').value = '';
+      }
+
+      // Function to calculate and display the result
+      function calculateResult() {
+        try {
+          // Use eval to calculate the expression
+          currinp = eval(currinp);
+          document.getElementById('display').value = currinp;
+        } catch (error) {
+          // If there's an error, display "Error"
+          document.getElementById('display').value = 'Error';
+          currinp = ''; // Reset input after error
+        }
+      }
+    </script>
+  </body>
+</html>
